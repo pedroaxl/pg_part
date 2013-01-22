@@ -120,7 +120,7 @@ DECLARE
   _indexdef TEXT;
 BEGIN
   FOR _r IN SELECT indexdef,
-                   replace(regexp_replace(regexp_replace(indexdef, ''.*\('', ''''), ''\).*'', ''''), '', '', ''_'') AS colname
+                    lower(replace(replace(regexp_replace(regexp_replace(indexdef, ''.*\('', ''''), ''\).*'', ''''), '', '', ''_''), '' '', ''_'')) AS colname
               FROM pg_indexes
              WHERE schemaname = _nspname
                AND tablename = _relname
